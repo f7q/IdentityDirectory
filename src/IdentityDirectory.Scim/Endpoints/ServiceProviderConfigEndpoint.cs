@@ -1,6 +1,6 @@
 ﻿namespace IdentityDirectory.Scim.Endpoints
 {
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     [Route(ScimConstants.Routes.Templates.ServiceProviderConfig)]
     public class ServiceProviderConfigEndpoint : Controller

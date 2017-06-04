@@ -1,7 +1,7 @@
 ﻿namespace IdentityDirectory.Scim.Endpoints
 {
     using System;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
     using Resources;
     using Services;
 
@@ -36,7 +36,8 @@
 		{
 			if (!this.ModelState.IsValid)
 			{
-			    return HttpBadRequest();
+                //return HttpBadRequest();
+                return new BadRequestResult();
             }
 			else
 			{

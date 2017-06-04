@@ -4,7 +4,7 @@
 
     using System;
     using Exceptions;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
     using Resources;
     using Services;
 
@@ -44,7 +44,8 @@
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest();
+                //return HttpBadRequest();
+                return new BadRequestResult();
             }
             resourceManager.Create(item);
             return CreatedAtRoute("GetByIdRoute", new {id = item.Id});

@@ -3,8 +3,8 @@
     #region
 
     using Klaims.Framework.IdentityMangement.Models;
-    using Microsoft.Data.Entity;
-
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
     #endregion
 
     public class IdentityDbContext : DbContext
@@ -31,7 +31,7 @@
                 b =>
                 {
                     b.HasKey(uc => uc.Id);
-                    b.HasOne<UserAccount>().WithMany().ForeignKey(uc => uc.UserId);
+                    b.HasOne<UserAccount>().WithMany().HasForeignKey(uc => uc.UserId);
                     b.ToTable("UserClaims");
                 });
 
@@ -39,7 +39,7 @@
                 b =>
                 {
                     b.HasKey(rc => rc.Id);
-                    b.HasOne<UserAccount>().WithMany().ForeignKey(rc => rc.UserId);
+                    b.HasOne<UserAccount>().WithMany().HasForeignKey(rc => rc.UserId);
                     b.ToTable("UserEmails");
                 });
 
@@ -47,7 +47,7 @@
                 b =>
                 {
                     b.HasKey(rc => rc.Id);
-                    b.HasOne<UserPhone>().WithMany().ForeignKey(rc => rc.UserId);
+                    b.HasOne<UserPhone>().WithMany().HasForeignKey(rc => rc.UserId);
                     b.ToTable("UserPhones");
                 });
         }

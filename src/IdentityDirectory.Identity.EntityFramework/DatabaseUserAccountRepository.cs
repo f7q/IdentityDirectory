@@ -7,7 +7,7 @@
     using Klaims.Framework.IdentityMangement;
     using Klaims.Framework.IdentityMangement.Models;
     using Klaims.Framework.Utility;
-    using Microsoft.Data.Entity;
+    using Microsoft.EntityFrameworkCore;
 
     public class DatabaseUserAccountRepository : IQueryableUserAccountRepository<UserAccount>
 	{

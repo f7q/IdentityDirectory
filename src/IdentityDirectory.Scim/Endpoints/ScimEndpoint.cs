@@ -1,7 +1,7 @@
 ﻿namespace IdentityDirectory.Scim.Endpoints
 {
     using Filters;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     [Produces(ScimConstants.ScimMediaType)]
 	[ScimExceptionFilter]

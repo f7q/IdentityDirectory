@@ -17,17 +17,17 @@
         private const string PathFilter = "name.familyName co \"user3\"";
         private const string Path2Filter = "name.familyName co \"user\"";
 
-        private readonly List<UserAccount> _testUsers = new List<UserAccount>
+        private readonly List<UserAccount> testUsers = new List<UserAccount>
                                                     {
                                                         new UserAccount { ProfileUrl = "http://myprofile.com", DisplayName = "BestEmployee" },
                                                         new UserAccount { ProfileUrl = "http://myprofile.com", DisplayName = "SomeEmployee" },
                                                         new UserAccount { DisplayName = "BestEmployee" },
                                                     };
 
-        private readonly List<ScimUser> _testResources = new List<ScimUser>
+        private readonly List<ScimUser> testResources = new List<ScimUser>
                                                     {
-                                                        new ScimUser("2","user2","user2gn","user2fn"),
-                                                        new ScimUser("3","user3","user3gn","user3fn")
+                                                        new ScimUser("2", "user2", "user2gn", "user2fn"),
+                                                        new ScimUser("3", "user3", "user3gn", "user3fn")
                                                     };
 
 
@@ -42,13 +42,13 @@
             var predicate = converter.Bind<UserAccount>(filterNode, string.Empty, false, mapperMoq.Object);
             Assert.NotNull(predicate);
             Console.WriteLine(predicate);
-            var usersCount = this._testUsers.AsQueryable().Count(predicate);
+            var usersCount = this.testUsers.AsQueryable().Count(predicate);
             Assert.Equal(2, usersCount);
         }
 
-        //[Fact]
-        //public void CanConvertPathFilter()
-        //{
+        // [Fact]
+        // public void CanConvertPathFilter()
+        // {
         //    var converter = new DefaultFilterBinder();
         //    var nameMapper = new DefaultAttributeNameMapper();
         //    var filterNode = FilterExpressionParser.Parse(PathFilter);
@@ -57,11 +57,11 @@
         //    Console.WriteLine(predicate);
         //    var usersCount = this._testResources.AsQueryable().Count(predicate);
         //    Assert.Equal(1, usersCount);
-        //}
+        // }
 
-        //[Fact]
-        //public void CanConvertPath2Filter()
-        //{
+        // [Fact]
+        // public void CanConvertPath2Filter()
+        // {
         //    var converter = new DefaultFilterBinder();
         //    var nameMapper = new DefaultAttributeNameMapper();
         //    var filterNode = FilterExpressionParser.Parse(Path2Filter);
@@ -70,6 +70,6 @@
         //    Console.WriteLine(predicate);
         //    var usersCount = this._testResources.AsQueryable().Count(predicate);
         //    Assert.Equal(2, usersCount);
-        //}
+        // }
     }
 }
