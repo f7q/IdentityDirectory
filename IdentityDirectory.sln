@@ -1,31 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{54E3D036-53DA-4940-9F91-00ABAA988B0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F9006B0-0DD1-4D63-84A2-E5BEFE18A0A2}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Web", "src\IdentityDirectory.Web\IdentityDirectory.Web.xproj", "{BE7A77A9-2577-4681-AE3A-3B4A5A7FA543}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Abstractions", "src\IdentityDirectory.Abstractions\IdentityDirectory.Abstractions.xproj", "{E3CBA2F5-1C29-4A03-B81A-4F9447B9B23B}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Scim", "src\IdentityDirectory.Scim\IdentityDirectory.Scim.xproj", "{6B12EB9E-3581-42E0-BD3C-8D8D5D11E5DE}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Identity.EntityFramework", "src\IdentityDirectory.Identity.EntityFramework\IdentityDirectory.Identity.EntityFramework.xproj", "{C9D5395A-D629-4DE2-A461-74D6618BD33C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{00AA91E0-57EB-4862-8793-B9D88524A827}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Scim.Test", "test\IdentityDirectory.Scim.Test\IdentityDirectory.Scim.Test.xproj", "{6A66CCFD-3EA0-45EA-82A9-A63F2EDA337D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Web", "src\IdentityDirectory.Web\IdentityDirectory.Web.csproj", "{BE7A77A9-2577-4681-AE3A-3B4A5A7FA543}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Identity.Abstractions", "src\IdentityDirectory.Identity.Abstractions\IdentityDirectory.Identity.Abstractions.xproj", "{5DA84424-8F65-495A-99EF-5A855EC4769A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Abstractions", "src\IdentityDirectory.Abstractions\IdentityDirectory.Abstractions.csproj", "{E3CBA2F5-1C29-4A03-B81A-4F9447B9B23B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityDirectory.Identity", "src\IdentityDirectory.Identity\IdentityDirectory.Identity.xproj", "{BF214CAE-8376-4ABE-A476-13FFB6B997FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Scim", "src\IdentityDirectory.Scim\IdentityDirectory.Scim.csproj", "{6B12EB9E-3581-42E0-BD3C-8D8D5D11E5DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Identity.EntityFramework", "src\IdentityDirectory.Identity.EntityFramework\IdentityDirectory.Identity.EntityFramework.csproj", "{C9D5395A-D629-4DE2-A461-74D6618BD33C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Scim.Test", "test\IdentityDirectory.Scim.Test\IdentityDirectory.Scim.Test.csproj", "{6A66CCFD-3EA0-45EA-82A9-A63F2EDA337D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Identity.Abstractions", "src\IdentityDirectory.Identity.Abstractions\IdentityDirectory.Identity.Abstractions.csproj", "{5DA84424-8F65-495A-99EF-5A855EC4769A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityDirectory.Identity", "src\IdentityDirectory.Identity\IdentityDirectory.Identity.csproj", "{BF214CAE-8376-4ABE-A476-13FFB6B997FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
