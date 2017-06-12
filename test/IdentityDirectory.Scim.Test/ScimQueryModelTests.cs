@@ -46,30 +46,30 @@
             Assert.Equal(2, usersCount);
         }
 
-        // [Fact]
-        // public void CanConvertPathFilter()
-        // {
-        //    var converter = new DefaultFilterBinder();
-        //    var nameMapper = new DefaultAttributeNameMapper();
-        //    var filterNode = FilterExpressionParser.Parse(PathFilter);
-        //    var predicate = converter.Bind<ScimUser>(filterNode, string.Empty, false, nameMapper);
-        //    Assert.NotNull(predicate);
-        //    Console.WriteLine(predicate);
-        //    var usersCount = this._testResources.AsQueryable().Count(predicate);
-        //    Assert.Equal(1, usersCount);
-        // }
+        [Fact]
+        public void CanConvertPathFilter()
+        {
+            var converter = new DefaultFilterBinder();
+            var nameMapper = new DefaultAttributeNameMapper();
+            var filterNode = ScimExpressionParser.ParseExpression(PathFilter);
+            var predicate = converter.Bind<ScimUser>(filterNode, string.Empty, false, nameMapper);
+            Assert.NotNull(predicate);
+            Console.WriteLine(predicate);
+            var usersCount = this.testResources.AsQueryable().Count(predicate);
+            Assert.Equal(1, usersCount);
+        }
 
-        // [Fact]
-        // public void CanConvertPath2Filter()
-        // {
-        //    var converter = new DefaultFilterBinder();
-        //    var nameMapper = new DefaultAttributeNameMapper();
-        //    var filterNode = FilterExpressionParser.Parse(Path2Filter);
-        //    var predicate = converter.Bind<ScimUser>(filterNode, string.Empty, false, nameMapper);
-        //    Assert.NotNull(predicate);
-        //    Console.WriteLine(predicate);
-        //    var usersCount = this._testResources.AsQueryable().Count(predicate);
-        //    Assert.Equal(2, usersCount);
-        // }
+        [Fact]
+        public void CanConvertPath2Filter()
+        {
+            var converter = new DefaultFilterBinder();
+            var nameMapper = new DefaultAttributeNameMapper();
+            var filterNode = ScimExpressionParser.ParseExpression(Path2Filter);
+            var predicate = converter.Bind<ScimUser>(filterNode, string.Empty, false, nameMapper);
+            Assert.NotNull(predicate);
+            Console.WriteLine(predicate);
+            var usersCount = this.testResources.AsQueryable().Count(predicate);
+            Assert.Equal(2, usersCount);
+        }
     }
 }

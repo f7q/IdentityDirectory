@@ -12,26 +12,29 @@
         const string CollectionFilter = "addresses[type eq \"work\"].streetAddress";
 
         // [Fact]
-        // public void CanParseSimpleFilter()
-        // {
-        //	var rootNode = FilterExpressionParser.Parse(SimpleFilter);
-        //	Assert.NotNull(rootNode);
-        //	Console.WriteLine(rootNode);
-        // }
-        // [Fact]
-        // public void CanParseFilterWithPrecedence()
-        // {
-        //	    var rootNode = FilterExpressionParser.Parse(PrecedenceFilter);
-        //	    Assert.NotNull(rootNode);
-        //	   Console.WriteLine(rootNode);
-        // }
-        //      [Fact]
-        //      public void CanParsePathPrecedence()
-        //      {
-        //          var rootNode = FilterExpressionParser.Parse(PathFilter);
-        //          Assert.NotNull(rootNode);
-        //          Console.WriteLine(rootNode);
-        //      }
+        public void CanParseSimpleFilter()
+        {
+            var rootNode = ScimExpressionParser.ParseExpression(SimpleFilter);
+            Assert.NotNull(rootNode);
+            Console.WriteLine(rootNode);
+        }
+
+         [Fact]
+        public void CanParseFilterWithPrecedence()
+        {
+            var rootNode = ScimExpressionParser.ParseExpression(PrecedenceFilter);
+            Assert.NotNull(rootNode);
+            Console.WriteLine(rootNode);
+        }
+
+        [Fact]
+        public void CanParsePathPrecedence()
+        {
+             var rootNode = ScimExpressionParser.ParseExpression(PathFilter);
+             Assert.NotNull(rootNode);
+             Console.WriteLine(rootNode);
+        }
+
         [Fact]
         public void CanParseCollectionFilter()
         {

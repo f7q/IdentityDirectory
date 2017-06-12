@@ -34,58 +34,57 @@ namespace IdentityDirectory.Scim.Query
         protected virtual Expression<Func<TResource, bool>> BindAttributeExpression<TResource>(ScimCallExpression expression, IAttributeNameMapper mapper)
         {
             var attributePathExpression = expression.Operands[0];
-            return null;
-            //var parameter = Expression.Parameter(typeof(TResource));
-            //var property = mapper.MapToInternal(expression.Attribute)
-            //    .Split('.')
-            //    .Aggregate<string, Expression>(parameter,Expression.PropertyOrField);
+            var parameter = Expression.Parameter(typeof(TResource));
+            var property = mapper.MapToInternal(expression.Operands[0].ToString())
+                .Split('.')
+                .Aggregate<string, Expression>(parameter,Expression.PropertyOrField);
 
-            //Expression binaryExpression = null;
-            //if (filter.Operator.Equals(ExpressionOperator.Eq))
-            //{
-            //    // Workaround for missing coersion between String and Guid types.
-            //    var propertyValue = property.Type == typeof(Guid) ? (object)Guid.Parse(expression.Value) : expression.Value;
-            //    binaryExpression = Expression.Equal(property, Expression.Convert(Expression.Constant(propertyValue), property.Type));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Co))
-            //{
-            //    var method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
-            //    binaryExpression = Expression.Call(property, method, Expression.Constant(expression.Value, typeof(string)));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Gt))
-            //{
-            //    binaryExpression = Expression.GreaterThan(property, Expression.Convert(Expression.Constant(expression.Value), property.Type));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Ge))
-            //{
-            //    binaryExpression = Expression.GreaterThanOrEqual(property, Expression.Convert(Expression.Constant(expression.Value), property.Type));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Lt))
-            //{
-            //    binaryExpression = Expression.LessThan(property, Expression.Convert(Expression.Constant(expression.Value), property.Type));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Le))
-            //{
-            //    binaryExpression = Expression.LessThanOrEqual(property, Expression.Convert(Expression.Constant(expression.Value), property.Type));
-            //}
-            //else if (filter.Operator.Equals(ExpressionOperator.Pr))
-            //{
-            //    // If value cannot be null, then it is always present.
-            //    if (IsNullable(property.Type))
-            //    {
-            //        binaryExpression = Expression.NotEqual(property, Expression.Constant(null, property.Type));
-            //    }
-            //    else
-            //    {
-            //        binaryExpression = Expression.Constant(true);
-            //    }
-            //}
-            //if (binaryExpression == null)
-            //{
-            //    throw new InvalidOperationException("Unsupported node operator");
-            //}
-
-            //return Expression.Lambda<Func<TResource, bool>>(binaryExpression, parameter);
+            Expression binaryExpression = null;
+            if (expression.OperatorName.Equals("Equal"))
+            {
+                // Workaround for missing coersion between String and Guid types.
+                var propertyValue = property.Type == typeof(Guid) ? (object)Guid.Parse(expression.Operands[1].ToString()) : expression.Operands[1].ToString();
+                binaryExpression = Expression.Equal(property, Expression.Convert(Expression.Constant(propertyValue), property.Type));
+            }
+            else if (expression.OperatorName.Equals("Contains"))
+            {
+                var method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                binaryExpression = Expression.Call(property, method, Expression.Constant(expression.Operands[1].ToString(), typeof(string)));
+            }
+            else if (expression.OperatorName.Equals("GreaterThan"))
+            {
+                binaryExpression = Expression.GreaterThan(property, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
+            }
+            else if (expression.OperatorName.Equals("GreaterThanOrEqual"))
+            {
+                binaryExpression = Expression.GreaterThanOrEqual(property, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
+            }
+            else if (expression.OperatorName.Equals("LessThan"))
+            {
+                binaryExpression = Expression.LessThan(property, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
+            }
+            else if (expression.OperatorName.Equals("LessThanOrEqual"))
+            {
+                binaryExpression = Expression.LessThanOrEqual(property, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
+            }
+            else if (expression.OperatorName.Equals("Present"))
+            {
+                // If value cannot be null, then it is always present.
+                if (IsNullable(property.Type))
+                {
+                    binaryExpression = Expression.NotEqual(property, Expression.Constant(null, property.Type));
+                }
+                else
+                {
+                    binaryExpression = Expression.Constant(true);
+                }
+            }
+            if (binaryExpression == null)
+            {
+                throw new InvalidOperationException("Unsupported node operator");
+            }
+            
+            return Expression.Lambda<Func<TResource, bool>>(binaryExpression, parameter);
         }
 
         protected virtual Expression<Func<TResource, bool>> BindLogicalExpression<TResource>(ScimCallExpression expression, IAttributeNameMapper mapper, string prefix)
