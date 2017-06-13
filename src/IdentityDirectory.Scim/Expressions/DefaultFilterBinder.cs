@@ -38,13 +38,23 @@ namespace IdentityDirectory.Scim.Query
             var property = mapper.MapToInternal(expression.Operands[0].ToString())
                 .Split('.')
                 .Aggregate<string, Expression>(parameter,Expression.PropertyOrField);
-
+            
             Expression binaryExpression = null;
             if (expression.OperatorName.Equals("Equal"))
             {
                 // Workaround for missing coersion between String and Guid types.
                 var propertyValue = property.Type == typeof(Guid) ? (object)Guid.Parse(expression.Operands[1].ToString()) : expression.Operands[1].ToString();
                 binaryExpression = Expression.Equal(property, Expression.Convert(Expression.Constant(propertyValue), property.Type));
+            }
+            else if (expression.OperatorName.Equals("StartsWith"))
+            {
+                var method = typeof(string).GetMethod("StartsWith", new[] { typeof(string) });
+                binaryExpression = Expression.Call(property, method, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
+            }
+            else if (expression.OperatorName.Equals("EndsWith"))
+            {
+                var method = typeof(string).GetMethod("EndsWith", new[] { typeof(string) });
+                binaryExpression = Expression.Call(property, method, Expression.Convert(Expression.Constant(expression.Operands[1].ToString()), property.Type));
             }
             else if (expression.OperatorName.Equals("Contains"))
             {

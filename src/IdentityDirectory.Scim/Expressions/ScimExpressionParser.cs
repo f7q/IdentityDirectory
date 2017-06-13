@@ -34,30 +34,23 @@
                                                                                  from rparen in Parse.Char(')')
                                                                                  select expr;
 
-
-
         private static readonly Parser<ScimExpression> LogicalExpression;
-
 
         private static readonly Parser<ScimExpression> AttributeExpression;
 
         private static readonly Parser<ScimExpression> Comparison;
         private static readonly Parser<ScimExpression> Presence;
 
-
         private static readonly Parser<char> StringContentChar = Parse.CharExcept("\\\"").Or(Parse.String("\\\\").Return('\\')).Or(Parse.String("\\\"").Return('\"'));
         private static readonly Parser<string> QuotedString = from open in Parse.Char('\"')
                                                               from content in StringContentChar.Many().Text()
                                                               from close in Parse.Char('\"')
                                                               select content;
-        
-
 
         static ScimExpressionParser()
         {
             CaseInsensitiveString = from content in QuotedString
                                     select ScimExpression.String(content);
-
 
             IdentifierName = Parse.Identifier(Parse.Letter, Parse.LetterOrDigit);
 
@@ -99,7 +92,15 @@
             //        "sw" / "ew" /
             //        "gt" / "lt" /
             //        "ge" / "le"
-            Comparison = Parse.XChainOperator(Le.Or(Lt).XOr(Ge.Or(Gt)).XOr(Eq.Or(Ne)).XOr(Sw.Or(Ew)).XOr(Co).XOr(Pr), Operand, ScimExpression.Binary);
+            Comparison = Parse.XChainOperator(
+                Le.Or(Lt)
+                .XOr(Ge.Or(Gt))
+                .XOr(Eq.Or(Ew))
+                .XOr(Ne)
+                .XOr(Sw)
+                .XOr(Co)
+                .XOr(Pr)
+                , Operand, ScimExpression.Binary);
 
             // attrPath SP "pr"
             Presence = Operand.SelectMany(operand => Pr, (operand, pr) => ScimExpression.Unary(pr, operand));
@@ -126,8 +127,6 @@
         {
             return Parse.String(op).Token().Return(opName);
         }
-
-
 
     }
 }
